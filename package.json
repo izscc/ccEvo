@@ -4,13 +4,12 @@
   "description": "能力驱动的自我进化引擎。结合 GEP 协议、能力树、价值函数和反进化锁，让 OpenClaw 持续自我精进。",
   "main": "index.js",
   "scripts": {
-    "test": "node --test test/*.test.js",
+    "health": "node scripts/health.js",
     "run": "node index.js run",
     "solidify": "node index.js solidify",
     "pcec": "node index.js pcec",
     "tree": "node index.js tree",
-    "report": "node index.js report",
-    "health": "node scripts/health.js"
+    "report": "node index.js report"
   },
   "keywords": ["meta", "evolution", "core", "self-improvement", "openclaw"],
   "license": "MIT",

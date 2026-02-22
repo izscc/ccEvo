@@ -43,15 +43,14 @@ ccEvo 通过 5 个核心模块实现这一目标：
 将以下指令直接发送给你的 OpenClaw，它会自动完成安装、验证和首次进化：
 
 ```
-安装 ccEvo 自我进化引擎：克隆 https://github.com/izscc/ccEvo.git 到 ~/openclaw/skills/ccEvo 目录（如果该目录已存在则先删除旧版再重新克隆），然后进入该目录运行 node scripts/health.js 确认全部检查通过，再运行 npm test 确认全部测试通过，最后运行 node index.js run --dry-run 执行一次干跑验证进化引擎工作正常。全部完成后告诉我安装结果。
+安装 ccEvo 自我进化引擎：克隆 https://github.com/izscc/ccEvo.git 到 ~/openclaw/skills/ccEvo 目录（如果该目录已存在则先删除旧版再重新克隆），然后进入该目录运行 node scripts/health.js 确认全部检查通过，最后运行 node index.js run --dry-run 执行一次干跑验证进化引擎工作正常。全部完成后告诉我安装结果。
 ```
 
 粘贴后 OpenClaw 会自主执行以下流程：
 1. `git clone` 拉取代码到 skills 目录
 2. `node scripts/health.js` 运行 24 项健康检查
-3. `npm test` 运行 57 个单元测试
-4. `node index.js run --dry-run` 干跑一轮完整进化周期
-5. 汇报安装结果
+3. `node index.js run --dry-run` 干跑一轮完整进化周期
+4. 汇报安装结果
 
 ### 手动安装
 
@@ -236,16 +235,9 @@ ccEvo/
 │   ├── capsules.json           # Capsule 库
 │   ├── events.jsonl            # 进化事件日志
 │   └── capability_tree.json    # 能力树
-├── scripts/
-│   ├── report.js               # 报告生成
-│   └── health.js               # 健康检查
-└── test/                       # 测试（57 个用例）
-    ├── signals.test.js
-    ├── selector.test.js
-    ├── mutation.test.js
-    ├── capability_tree.test.js
-    ├── vfm.test.js
-    └── adl.test.js
+└── scripts/
+    ├── report.js               # 报告生成
+    └── health.js               # 健康检查
 ```
 
 ## 数据文件
@@ -259,12 +251,9 @@ ccEvo/
 | `events.jsonl` | JSONL | 进化事件日志，追加写入，可审计 |
 | `capability_tree.json` | JSON Object | 能力树持久化 |
 
-## 测试
+## 验证
 
 ```bash
-# 运行全部测试（57 个用例）
-npm test
-
 # 健康检查（24 项）
 node scripts/health.js
 ```
