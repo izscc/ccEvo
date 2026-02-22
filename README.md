@@ -38,26 +38,34 @@ ccEvo 通过 5 个核心模块实现这一目标：
 
 ## 安装
 
-### 方式一：直接复制到 OpenClaw workspace（推荐）
+### 一句话安装（推荐）
 
-```bash
-# 克隆仓库
-git clone https://github.com/izscc/ccEvo.git
+将以下指令直接发送给你的 OpenClaw，它会自动完成安装、验证和首次进化：
 
-# 复制到 OpenClaw 的 skills 目录
-cp -r ccEvo ~/openclaw/skills/ccEvo
+```
+安装 ccEvo 自我进化引擎：克隆 https://github.com/izscc/ccEvo.git 到 ~/openclaw/skills/ccEvo 目录（如果该目录已存在则先删除旧版再重新克隆），然后进入该目录运行 node scripts/health.js 确认全部检查通过，再运行 npm test 确认全部测试通过，最后运行 node index.js run --dry-run 执行一次干跑验证进化引擎工作正常。全部完成后告诉我安装结果。
 ```
 
-安装完成后，OpenClaw 会自动加载 `SKILL.md` 中声明的 ccEvo Skill。
+粘贴后 OpenClaw 会自主执行以下流程：
+1. `git clone` 拉取代码到 skills 目录
+2. `node scripts/health.js` 运行 24 项健康检查
+3. `npm test` 运行 57 个单元测试
+4. `node index.js run --dry-run` 干跑一轮完整进化周期
+5. 汇报安装结果
 
-### 方式二：符号链接（开发模式）
+### 手动安装
+
+```bash
+# 克隆到 OpenClaw skills 目录
+git clone https://github.com/izscc/ccEvo.git ~/openclaw/skills/ccEvo
+```
+
+### 符号链接（开发模式）
 
 ```bash
 git clone https://github.com/izscc/ccEvo.git ~/projects/ccEvo
 ln -s ~/projects/ccEvo ~/openclaw/skills/ccEvo
 ```
-
-这样修改源码后无需重新复制。
 
 ## 快速开始
 
