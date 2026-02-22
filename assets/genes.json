@@ -1,0 +1,313 @@
+[
+  {
+    "type": "Gene",
+    "id": "gene_repair_session_error",
+    "category": "repair",
+    "signals_match": [
+      "log_error",
+      "errsig:*"
+    ],
+    "preconditions": [
+      "Session log 中存在错误记录",
+      "错误可定位到具体模块或操作"
+    ],
+    "strategy": [
+      "从 session log 提取错误上下文（stopReason, errorMessage）",
+      "定位错误发生的代码路径或配置项",
+      "分析根因：是代码缺陷、配置错误还是外部依赖问题",
+      "编写最小化修复补丁",
+      "添加或更新相关验证命令",
+      "固化并生成 Capsule"
+    ],
+    "constraints": {
+      "max_files": 5,
+      "forbidden_paths": [
+        ".git",
+        "node_modules",
+        "package-lock.json"
+      ]
+    },
+    "validation": [
+      "node -e \"require('./index'); console.log('ok')\""
+    ],
+    "capability_node_id": null,
+    "v_score": 75,
+    "created_at": "2026-02-22T00:00:00Z"
+  },
+  {
+    "type": "Gene",
+    "id": "gene_repair_recurring_error",
+    "category": "repair",
+    "signals_match": [
+      "recurring_error",
+      "log_error"
+    ],
+    "preconditions": [
+      "同一错误模式出现 3 次以上",
+      "非偶发性外部环境问题"
+    ],
+    "strategy": [
+      "聚合所有相同模式的错误条目，提取共同特征",
+      "区分症状与根因：是否多个表层错误指向同一底层缺陷",
+      "设计系统性修复方案（而非逐个修补）",
+      "加入防御性检查防止同类错误复发",
+      "编写回归测试验证修复效果",
+      "固化并记录修复模式到 Capsule"
+    ],
+    "constraints": {
+      "max_files": 8,
+      "forbidden_paths": [
+        ".git",
+        "node_modules"
+      ]
+    },
+    "validation": [
+      "node --test test/"
+    ],
+    "capability_node_id": null,
+    "v_score": 85,
+    "created_at": "2026-02-22T00:00:00Z"
+  },
+  {
+    "type": "Gene",
+    "id": "gene_repair_loop_breaker",
+    "category": "repair",
+    "signals_match": [
+      "repair_loop_detected"
+    ],
+    "preconditions": [
+      "连续 3 次以上变异应用后固化失败",
+      "修复尝试陷入循环"
+    ],
+    "strategy": [
+      "暂停当前修复路径，回退到最近的稳定状态",
+      "分析循环原因：是验证条件过严、修复方向错误还是依赖冲突",
+      "尝试完全不同的修复策略（换路径而非加力度）",
+      "如果问题超出自动修复能力，标记为需要人工介入",
+      "降低该区域的自动变异频率",
+      "记录失败模式到 Capsule 防止未来重蹈覆辙"
+    ],
+    "constraints": {
+      "max_files": 3,
+      "forbidden_paths": [
+        ".git",
+        "node_modules",
+        "assets/genes.json",
+        "SKILL.md"
+      ]
+    },
+    "validation": [
+      "node -e \"require('./index'); console.log('ok')\""
+    ],
+    "capability_node_id": null,
+    "v_score": 70,
+    "created_at": "2026-02-22T00:00:00Z"
+  },
+  {
+    "type": "Gene",
+    "id": "gene_optimize_tool_usage",
+    "category": "optimize",
+    "signals_match": [
+      "high_tool_usage:*",
+      "repeated_tool_usage:*"
+    ],
+    "preconditions": [
+      "工具调用频率异常高或存在连续重复调用",
+      "系统整体处于稳定状态"
+    ],
+    "strategy": [
+      "统计高频工具的调用模式：哪些是有效调用，哪些是冗余",
+      "识别可合并的连续调用（如多次读取同一文件）",
+      "设计缓存策略或批量操作减少调用次数",
+      "如果是 Agent 行为模式问题，调整相关 prompt 或策略",
+      "验证优化后功能不变，调用次数下降",
+      "固化优化方案"
+    ],
+    "constraints": {
+      "max_files": 6,
+      "forbidden_paths": [
+        ".git",
+        "node_modules"
+      ]
+    },
+    "validation": [
+      "node -e \"require('./index'); console.log('ok')\""
+    ],
+    "capability_node_id": null,
+    "v_score": 60,
+    "created_at": "2026-02-22T00:00:00Z"
+  },
+  {
+    "type": "Gene",
+    "id": "gene_optimize_stable_plateau",
+    "category": "optimize",
+    "signals_match": [
+      "stable_success_plateau"
+    ],
+    "preconditions": [
+      "最近 10 次执行全部成功",
+      "无紧急修复需求",
+      "存在可量化的效率提升空间"
+    ],
+    "strategy": [
+      "审查当前执行流程，识别耗时最长的环节",
+      "检查是否存在可消除的冗余步骤",
+      "评估是否有操作可以并行化或异步化",
+      "小步优化：每次仅改进一个环节，验证后再继续",
+      "对比优化前后的执行指标",
+      "固化并更新相关能力节点的 v_score"
+    ],
+    "constraints": {
+      "max_files": 8,
+      "forbidden_paths": [
+        ".git",
+        "node_modules"
+      ]
+    },
+    "validation": [
+      "node --test test/"
+    ],
+    "capability_node_id": null,
+    "v_score": 55,
+    "created_at": "2026-02-22T00:00:00Z"
+  },
+  {
+    "type": "Gene",
+    "id": "gene_innovate_user_request",
+    "category": "innovate",
+    "signals_match": [
+      "user_feature_request"
+    ],
+    "preconditions": [
+      "用户消息中包含功能/能力/添加等关键词",
+      "请求可转化为具体的技术实现"
+    ],
+    "strategy": [
+      "从用户消息中提取具体的功能需求描述",
+      "在能力树中查找是否已有类似能力（避免重复建设）",
+      "设计最小可行实现方案（MVP）",
+      "确定新能力在能力树中的挂载位置",
+      "实现核心功能，编写验证命令",
+      "在能力树中注册新节点",
+      "固化并通知用户新能力可用"
+    ],
+    "constraints": {
+      "max_files": 10,
+      "forbidden_paths": [
+        ".git",
+        "node_modules",
+        "package-lock.json"
+      ]
+    },
+    "validation": [
+      "node -e \"require('./index'); console.log('ok')\""
+    ],
+    "capability_node_id": null,
+    "v_score": 65,
+    "created_at": "2026-02-22T00:00:00Z"
+  },
+  {
+    "type": "Gene",
+    "id": "gene_innovate_capability_growth",
+    "category": "innovate",
+    "signals_match": [
+      "capability_candidate:*"
+    ],
+    "preconditions": [
+      "存在被识别的候选能力",
+      "候选能力 V-Score 评估 >= 40"
+    ],
+    "strategy": [
+      "评估候选能力的价值（VFM 四维度评分）",
+      "确定能力的输入/输出/前置条件/失败边界",
+      "在能力树中找到合适的父节点",
+      "实现能力的核心逻辑",
+      "编写验证命令确认能力可用",
+      "在能力树中生长新节点（growNode）",
+      "创建关联的 Gene 以便未来优化该能力"
+    ],
+    "constraints": {
+      "max_files": 12,
+      "forbidden_paths": [
+        ".git",
+        "node_modules"
+      ]
+    },
+    "validation": [
+      "node -e \"require('./index'); console.log('ok')\""
+    ],
+    "capability_node_id": null,
+    "v_score": 50,
+    "created_at": "2026-02-22T00:00:00Z"
+  },
+  {
+    "type": "Gene",
+    "id": "gene_innovate_stagnation_break",
+    "category": "innovate",
+    "signals_match": [
+      "evolution_stagnation"
+    ],
+    "preconditions": [
+      "连续周期无实质进化产出",
+      "PCEC 强制突破触发"
+    ],
+    "strategy": [
+      "运行思维爆炸问题生成器（explosion questions）",
+      "从爆炸问题中选择最具可行性的方向",
+      "审查当前能力树，识别最薄弱或最有潜力的分支",
+      "设计一个突破性的小实验（非渐进式改进）",
+      "实现并验证实验结果",
+      "无论成功失败都记录到 Capsule（失败经验同样有价值）"
+    ],
+    "constraints": {
+      "max_files": 8,
+      "forbidden_paths": [
+        ".git",
+        "node_modules",
+        "SKILL.md"
+      ]
+    },
+    "validation": [
+      "node -e \"require('./index'); console.log('ok')\""
+    ],
+    "capability_node_id": null,
+    "v_score": 45,
+    "created_at": "2026-02-22T00:00:00Z"
+  },
+  {
+    "type": "Gene",
+    "id": "gene_repair_all_error_session",
+    "category": "repair",
+    "signals_match": [
+      "evolution_stagnation",
+      "recurring_error"
+    ],
+    "preconditions": [
+      "全部 assistant 消息都以错误终止",
+      "系统处于完全不可用状态"
+    ],
+    "strategy": [
+      "进入紧急修复模式：冻结所有 innovate/optimize 变异",
+      "检查环境依赖是否完整（Node.js 版本、包依赖等）",
+      "检查配置文件是否损坏",
+      "从最近成功的 Capsule 恢复已知良好状态",
+      "逐步恢复功能，每恢复一项立即验证",
+      "恢复完成后运行完整测试套件",
+      "记录故障根因和恢复步骤到 Capsule"
+    ],
+    "constraints": {
+      "max_files": 10,
+      "forbidden_paths": [
+        ".git",
+        "node_modules"
+      ]
+    },
+    "validation": [
+      "node --test test/",
+      "node scripts/health.js"
+    ],
+    "capability_node_id": null,
+    "v_score": 90,
+    "created_at": "2026-02-22T00:00:00Z"
+  }
+]

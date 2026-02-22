@@ -1,0 +1,10 @@
+{
+  "root": {
+    "id": "cap",
+    "name": "Root",
+    "level": "high",
+    "parent_id": null,
+    "children": []
+  },
+  "nodes": {}
+}
